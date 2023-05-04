@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Place" representedClassName="Place" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="illustration" optional="YES" attributeType="String"/>
+        <attribute name="locationLat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="locationLon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="placeDescription" optional="YES" attributeType="String"/>
+        <attribute name="street" optional="YES" attributeType="String"/>
+        <relationship name="favoriteBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="placesFavorite" inverseEntity="User"/>
+        <relationship name="hatedBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="placesHated" inverseEntity="User"/>
+        <relationship name="lovedBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="placesLoved" inverseEntity="User"/>
+        <relationship name="quests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quest" inverseName="questPlace" inverseEntity="Quest"/>
+        <relationship name="seenBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="placesSeen" inverseEntity="User"/>
+    </entity>
+    <entity name="Prize" representedClassName="Prize" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="illustration" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="ownedBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="prizesOwned" inverseEntity="User"/>
+    </entity>
+    <entity name="Quest" representedClassName="Quest" syncable="YES">
+        <attribute name="questDescription" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="completedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="questsCompleted" inverseEntity="User"/>
+        <relationship name="questPlace" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="quests" inverseEntity="Place"/>
+        <relationship name="reward" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reward" inverseName="questReward" inverseEntity="Reward"/>
+    </entity>
+    <entity name="Reward" representedClassName="Reward" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="questReward" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quest" inverseName="reward" inverseEntity="Quest"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="mileage" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="pouch" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="totalPlaceSeen" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalQuestCompleted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalQuestEvent" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="placesFavorite" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="favoriteBy" inverseEntity="Place"/>
+        <relationship name="placesHated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="hatedBy" inverseEntity="Place"/>
+        <relationship name="placesLoved" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="lovedBy" inverseEntity="Place"/>
+        <relationship name="placesSeen" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Place" inverseName="seenBy" inverseEntity="Place"/>
+        <relationship name="prizesOwned" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Prize" inverseName="ownedBy" inverseEntity="Prize"/>
+        <relationship name="questsCompleted" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quest" inverseName="completedBy" inverseEntity="Quest"/>
+    </entity>
+</model>
